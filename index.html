@@ -4,22 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NotizBlock</title>
+    <link rel="stylesheet" href="./scripts/style/main.css" />
     <script src="./scripts/main.js"></script>
   </head>
   <body onload="init()">
-   <h1>Create a new Note</h1>
-    <div>
-      <p>Title:<input id="title_input" type="text" /></p>
-      <p>Content:<input id="note_input" type="text" /></p>
+    <header>
+      <h1>NotizBlock</h1>
+    </header>
+    <main>
+      <div class="new_note_conainer">
+        <label for="title_input">
+          <input id="title_input" type="text" placeholder="Title" />
+        </label>
 
-      <button onclick="addNote()">Add note</button>
-    </div>
-    <h2>Notes</h2>
-    <div id="notes">jjdjjdj</div>
-    <h2>Archive Notes</h2>
-    <div id="archive_notes"></div>
-    <h2>Delet Notes</h2>
-    <div id="delete_notes"></div>
-   
+        <label for="note_input">
+          <textarea id="note_input" placeholder="Note..."></textarea>
+        </label>
+        <button onclick="addNote()">Add note</button>
+      </div>
+      <div class="notes_container normal_notes">
+        <h2>Notes</h2>
+        <div class="notes" id="notes">
+        </div>
+      </div>
+
+      <div class="notes_container archive_notes">
+        <h2>Archive Notes</h2>
+        <div class="notes"  id="archive_notes">
+        
+        </div>
+      </div>
+
+      <div class="notes_container delete_notes">
+        <h2>Delete Notes</h2>
+        <div class="notes" id="delete_notes">
+          
+        </div>
+      </div>
+    </main>
   </body>
 </html>

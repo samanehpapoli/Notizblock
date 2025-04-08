@@ -28,10 +28,13 @@ function renderNotes() {
   }
 }
 function noteTemplate(index) {
-  return `<p> title: ${notesTitle[index]} - text:${notes[index]}
-   <button onclick ="moveFromNotesToDeleteNotes(${index})">x</button>
-   <button onclick ="moveFromNotesToArchiveNotes(${index})">A</button>
-   </p>`;
+  return ` <div class="notes">
+          <div class="note">
+            <h3>${notesTitle[index]}</h3>
+            <p>${notes[index]}</p>
+            <span class="button_left" onclick ="moveFromNotesToDeleteNotes(${index})">X</span>
+            <span class="button_right" onclick ="moveFromNotesToArchiveNotes(${index})">A</span>
+          </div>`;
 }
 function moveFromNotesToArchiveNotes(index) {
   let archiveNote = notes.splice(index, 1);
@@ -56,10 +59,12 @@ function renderArchiveNotes() {
 }
 
 function archiveNoteTemplate(index) {
-  return `<p>title:${archiveNotesTitle[index]}-text:${archiveNotes[index]}
-  <button onclick="moveFromArchiveNotesToDeleteNotes(${index})">x</button>
-  <button onclick="moveFromArchiveNotesToNotes(${index})">N</button>
-  </p>`;
+  return `<div class="note">
+          <h3>${archiveNotesTitle[index]}</h3>
+          <p>${archiveNotes[index]}</p>
+          <span class="button_left" onclick="moveFromArchiveNotesToDeleteNotes(${index})">X</span>
+          <span class="button_right" onclick="moveFromArchiveNotesToNotes(${index})">N</span>
+        </div>`;
 }
 
 function renderDeleteNotes() {
@@ -69,10 +74,12 @@ function renderDeleteNotes() {
   }
 }
 function deleteNoteTemplate(index) {
-  return `<p>title:${deleteNotesTitle[index]}-text:${deleteNotes[index]}
-   <button onclick="moveFromDeleteNotesToTrash(${index})">x</button>
-  <button onclick="moveFromDeleteNotesToNotes(${index})">N</button>
-  </p>`;
+  return `<div class="note">
+            <h3>${deleteNotesTitle[index]}</h3>
+            <p>text:${deleteNotes[index]}</p>
+            <span class="button_left"  onclick="moveFromDeleteNotesToTrash(${index})">X</span>
+            <span class="button_right"onclick="moveFromDeleteNotesToNotes(${index})">N</span>
+          </div>`;
 }
 function moveFromTrashToNote(index) {
   let moveNote = deleteNotes.splice(index, 1);
@@ -128,7 +135,6 @@ function moveFromArchiveNotesToNotes(index) {
   renderNotes();
 }
 
-
 function moveFromArchiveNotesToDeleteNotes(index) {
   let deletedNote = archiveNotes.splice(index, 1);
   let deletedNoteTitle = archiveNotesTitle.splice(index, 1);
@@ -159,17 +165,16 @@ function moveFromDeleteNotesToNotes(index) {
   renderNotes();
 }
 
-function moveFromDeleteNotesToTrash(index){
-deleteNotes.splice(index, 1);
-deleteNotesTitle.splice(index, 1);
+function moveFromDeleteNotesToTrash(index) {
+  deleteNotes.splice(index, 1);
+  deleteNotesTitle.splice(index, 1);
 
-saveTolocalStorage("deleteNotes", deleteNotes);
-saveTolocalStorage("deleteNotesTitle", deleteNotesTitle);
+  saveTolocalStorage("deleteNotes", deleteNotes);
+  saveTolocalStorage("deleteNotesTitle", deleteNotesTitle);
 
-renderDeleteNotes();
+  renderDeleteNotes();
 }
 
- 
 function saveTolocalStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
